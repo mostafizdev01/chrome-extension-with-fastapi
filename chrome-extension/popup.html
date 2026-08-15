@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Text Saver</title>
+
+    <!-- Popup Styles -->
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+
+  <body>
+    <main class="popup">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">
+          <span class="logo-icon">📝</span>
+          <div>
+            <h1>Text Saver</h1>
+            <p>Chrome Extension</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Selected Text Section -->
+      <section class="card">
+
+        <div class="section-title">
+          <span>Selected Text</span>
+          <small>Live Preview</small>
+        </div>
+
+        <div id="selected-text" class="text-box">
+          <div class="placeholder">
+            Select any text from a webpage and it will appear here.
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Status -->
+      <footer class="footer">
+        <span class="status-dot"></span>
+        <span id="status">Waiting for text selection...</span>
+      </footer>
+
+    </main>
+
+    <!-- Popup Logic -->
+    <script src="popup.js"></script>
+  </body>
+</html>
