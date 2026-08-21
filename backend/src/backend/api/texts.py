@@ -40,3 +40,15 @@ def create_text(
             "created_at": new_text.created_at
         }
     }
+    
+    
+@router.get("/")
+def get_texts(
+    db: Session = Depends(get_db)
+):
+    texts = db.query(SelectedText).all()
+    
+    return {
+        "message": "Texts retrieved successfully",
+        "data": texts
+    }
