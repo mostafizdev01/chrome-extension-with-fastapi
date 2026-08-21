@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from backend.api.texts import router as texts_router
 from backend.db.database import Base, engine
@@ -11,6 +12,15 @@ app = FastAPI(
     title="Text Sync Backend",
     description = "Backend for the chrome extension text sync system",
     version = "1.0.0"
+)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
 )
 
 
