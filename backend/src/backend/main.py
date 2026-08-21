@@ -1,5 +1,11 @@
 from fastapi import FastAPI
 
+from backend.db.database import Base, engine
+from backend.models.text import SelectedText
+
+
+Base.metadata.create_all(bind = engine)
+
 app = FastAPI(
     title="Text Sync Backend",
     description = "Backend for the chrome extension text sync system",
