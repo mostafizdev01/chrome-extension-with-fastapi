@@ -1,5 +1,6 @@
 import os
 
+from datetime import datetime
 import httpx
 from dotenv import load_dotenv
 
@@ -25,6 +26,11 @@ async def save_to_airtable(
     retry_count: int,
     created_at: str,
 ):
+    
+    formatted_created_at = datetime.fromisoformat(
+        created_at
+    ).strftime("%Y-%m-%d")
+    
     headers = {
         "Authorization": f"Bearer {AIRTABLE_TOKEN}",
         "Content-Type": "application/json",
@@ -35,7 +41,7 @@ async def save_to_airtable(
             "content": content,
             "status": status,
             "retry_count": retry_count,
-            "created_at": created_at,
+            "created_at": formatted_created_at,
         }
     }
 
@@ -46,6 +52,13 @@ async def save_to_airtable(
             json=data,
         )
 
-    response.raise_for_status()
+        if not response.is_success:
+            print("❌ Airtable Status Code:", response.status_code)
+            print("❌ Airtable Response:", response.text)
+
+            raise Exception(
+                f"Airtable error: {response.status_code} - "
+                f"{response.text}"
+            )
 
     return response.json()
